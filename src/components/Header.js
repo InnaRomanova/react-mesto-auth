@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import logo from '../images/logo-1.svg';
 
 function Header({email, onSignOut}) {
     return (
         <header className="header">
             <img className="header__logo" src={logo} alt="логотип" />
-            <Switch>
+            <Routes>
                 <Route path="/sign-up">
                     <div className="header__container">
                         <Link to="sing-in" className="header__link"> Войти </Link>
@@ -23,7 +23,7 @@ function Header({email, onSignOut}) {
                         <Link to="sing-in" className="header__link" onClick={onSignOut}> Выйти </Link>
                     </div>
                 </Route>
-            </Switch>
+            </Routes>
         </header>
     );
 }

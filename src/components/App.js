@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
-import { Switch, useHistory, Redirect, Route } from 'react-router-dom';
+import { Routes, useNavigate, Navigate, Route } from 'react-router-dom';
 import * as auth from '../utils/auth.js';
 import Header from './Header.js';
 import Main from './Main.js';
@@ -14,7 +14,7 @@ import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
 import AddPlacePopup from './AddPlacePopup.js';
 import RemoveCardPopup from './RemoveCardPopup.js';
-import Login from './Login';
+import Login from './Login.js';
 import Register from './Register.js';
 import ProtectedRoute from './ProtectedRoute.js';
 import InfoTooltip from './InfoTooltip.js';
@@ -34,7 +34,7 @@ function App() {
   const [flag, setFlag] = useState(false);
   const [isInfoUser, setIsInfoUser] = useState(false);
   const [loginIn, setLoginIn] = useState('');
-  const history = useHistory();
+  const history = useNavigate();
 
   const handleCardClick = (card) => {
     setSelectCard(card);
@@ -106,7 +106,7 @@ function App() {
       })
   }
 
-  const handleRedisterSubmit = (email, password) => {
+  const handleRegisterSubmit = (email, password) => {
     auth.register(email, password)
       .then(() => {
         setFlag(true);
@@ -205,7 +205,7 @@ function App() {
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page__wrapper">
           <Header email={userEmail} onSignOut={handleSignOut} />
-          <Switch>
+          <Routes>
             <ProtectedRoute
               path="/main"
               loginIn={loginIn}
@@ -221,15 +221,15 @@ function App() {
               onDeletePopup={setisRemoveCardPopupOpen}
               setDeleteCard={setDeleteCard} />
               <Route path="/sign-up">
-                <Register onRegister={handleRedisterSubmit} />
+                <Register onRegister={handleRegisterSubmit} />
               </Route>
               <Route path="/sign-in">
                 <Login onLogin={handleLoginSubmit} />
               </Route>
               <Route path="/">
-                <Register to="/main" /> : <Redirect to="/sign-in" />
+                {loginIn ? <Navigate to="/main" /> : <Navigate to="/sign-in" />}
               </Route>
-          </Switch>
+          </Routes>
           <Footer />
         </div>
         <EditProfilePopup
