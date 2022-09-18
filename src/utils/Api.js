@@ -9,8 +9,8 @@ class Api {
     const pattern = {
       method: method,
       headers: {
-        authorization: this._token,
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
       }
     }
 
@@ -19,6 +19,7 @@ class Api {
       info ? { ...pattern, body: JSON.stringify(info) } : pattern
     )
       .then(res => {
+        console.log(localStorage.jwt)
         if (res.ok) {
           return res.json()
         } else {

@@ -5,11 +5,22 @@ import ReactDOM from 'react-dom/client';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import './pages/index.css';
+import { BrowserRouter as Router,  Switch,  Route,  Link, Routes } from "react-router-dom";
+import SignIn from '../src/pages/sign-in';
+import SignUp from '../src/pages/sign-up';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>
+            <div>
+              <Routes>
+                <Route path="/" element={<App />} />
+                <Route path="/sign-in" element={<SignIn />} />
+                <Route path="/sign-up" element={<SignUp />} />
+                </Routes>
+            </div>
+        </Router>
   </React.StrictMode>,
 );
 

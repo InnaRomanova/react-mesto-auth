@@ -11,7 +11,10 @@ import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import AddPlacePopup from './AddPlacePopup.js';
-import RemoveCardPopup from './RemoveCardPopup.js'
+import RemoveCardPopup from './RemoveCardPopup.js';
+import { BrowserRouter as Router,  Switch,  Route,  Link, Routes } from "react-router-dom";
+import SignIn from '../pages/sign-in.js';
+import SignUp from '../pages/sign-up.js';
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarClick] = useState(false);
