@@ -1,5 +1,5 @@
 import React from "react"
-import { withRouter } from "react-router-dom"
+// import { withRouter } from "react-router-dom"
 
 function Login({ onLogin }) {
     const [email, setEmail] = React.useState('');
@@ -35,4 +35,4 @@ function Login({ onLogin }) {
         </div>
     )
 }
-export default withRouter (Login);
+export default Login;

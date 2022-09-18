@@ -111,7 +111,7 @@ function App() {
       .then(() => {
         setFlag(true);
         setIsInfoUser(true);
-        history.push('./sing-in');
+        history.push('./sign-in');
       })
       .catch((err) => {
         setFlag(flag);

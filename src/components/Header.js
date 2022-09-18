@@ -9,18 +9,18 @@ function Header({email, onSignOut}) {
             <Routes>
                 <Route path="/sign-up">
                     <div className="header__container">
-                        <Link to="sing-in" className="header__link"> Войти </Link>
+                        <Link to="sign-in" className="header__link"> Войти </Link>
                     </div>
                 </Route>
                 <Route path="/sign-in">
                 <div className="header__container">
-                        <Link to="sing-up" className="header__link"> Зарегистрироваться </Link>
+                        <Link to="sign-up" className="header__link"> Зарегистрироваться </Link>
                     </div>
                 </Route>
                 <Route path="/">
                 <div className="header__container">
                     <div>{email}</div>
-                        <Link to="sing-in" className="header__link" onClick={onSignOut}> Выйти </Link>
+                        <Link to="sign-in" className="header__link" onClick={onSignOut}> Выйти </Link>
                     </div>
                 </Route>
             </Routes>
