@@ -27,10 +27,13 @@ function App() {
   const [currentUser, setСurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [deleteCard, setDeleteCard] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
+  const [userId, setUserid] = useState('');
 
-  const BASE_URL = 'https://auth.nomoreparties.co/';
+  const BASE_URL = 'https://auth.nomoreparties.co';
 
   const restContent = (token) => {
+    console.log(token)
     return fetch(`${BASE_URL}/users/me`, {
       method: 'GET',
       headers: {
@@ -127,6 +130,7 @@ function App() {
   //   Promise.all([newApi.getCards(), newApi.getUserInfo()])
   //     .then(([cards, userData]) => {
   //       setCards(cards);
+  //       console.log(userData)
   //       setСurrentUser(userData)
   //     })
   //     .catch((err) => {
@@ -139,6 +143,7 @@ function App() {
       const jwt = localStorage.getItem("jwt");
       restContent(jwt)
         .then((data) => {
+          setUserEmail(data.data.email);
           // setLoggedIn(true);
           // setUserEmail(data.data.email);
           console.log(data)
@@ -189,11 +194,13 @@ function App() {
     }
   }
 
+
+
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page__wrapper">
-          <Header />
+          <Header userEmail={userEmail}/>
           <Main onEditAvatar={handleEditAvatarClick}
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
