@@ -9,10 +9,10 @@
     font-size: 14px;
     line-height: 17px;
     color: #fff;
-    /* border-bottom: 2px solid rgba(255, 255, 255, .2); */
+    border-bottom: 2px solid rgba(255, 255, 255, .2);
     border: 0;
     background-color: black;
     cursor: text;
     outline: 0;
-    text-decoration: underline 2px solid;
+    /* text-decoration: underline 2px solid; */
 }

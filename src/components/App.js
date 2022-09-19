@@ -1,6 +1,7 @@
 //корневой компонент
 
 import { useEffect, useState } from 'react';
+// import {restContent} from "../utils/auth";
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
@@ -12,7 +13,7 @@ import EditAvatarPopup from './EditAvatarPopup.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import AddPlacePopup from './AddPlacePopup.js';
 import RemoveCardPopup from './RemoveCardPopup.js';
-import { BrowserRouter as Router,  Switch,  Route,  Link, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, Routes } from "react-router-dom";
 import SignIn from '../pages/sign-in.js';
 import SignUp from '../pages/sign-up.js';
 
@@ -26,6 +27,21 @@ function App() {
   const [currentUser, setСurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [deleteCard, setDeleteCard] = useState(false);
+
+  const BASE_URL = 'https://auth.nomoreparties.co/';
+
+  const restContent = (token) => {
+    return fetch(`${BASE_URL}/users/me`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then((response) => {
+        return response.ok ? response.json() : Promise.reject(response.status)
+      })
+  }
 
   const handleCardClick = (card) => {
     setSelectCard(card);
@@ -107,16 +123,34 @@ function App() {
     setDeleteCard(false);
   }
 
+  // useEffect(() => {
+  //   Promise.all([newApi.getCards(), newApi.getUserInfo()])
+  //     .then(([cards, userData]) => {
+  //       setCards(cards);
+  //       setСurrentUser(userData)
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     })
+  // }, []);
+
   useEffect(() => {
-    Promise.all([newApi.getCards(), newApi.getUserInfo()])
-      .then(([cards, userData]) => {
-        setCards(cards);
-        setСurrentUser(userData)
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-  }, []);
+    if (localStorage.getItem("jwt")) {
+      const jwt = localStorage.getItem("jwt");
+      restContent(jwt)
+        .then((data) => {
+          // setLoggedIn(true);
+          // setUserEmail(data.data.email);
+          console.log(data)
+          // history.push("/"); 
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+    } else {
+      console.log('a')
+    }
+  }, [localStorage])
 
   const closeByEsc = (e) => {
     if (e.key === 'Escape') {
@@ -136,6 +170,24 @@ function App() {
     }
     return () => (document.removeEventListener('keydown', closeByEsc));
   }, [isAddPlacePopupOpen, isEditAvatarPopupOpen, isEditProfilePopupOpen, isImagePopupOpened]);
+
+  function checkToken() {
+    if (localStorage.getItem("jwt")) {
+      const jwt = localStorage.getItem("jwt");
+      restContent(jwt)
+        .then((data) => {
+          // setLoggedIn(true);
+          // setUserEmail(data.data.email);
+          console.log(data)
+          // history.push("/"); 
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+    } else {
+      console.log()
+    }
+  }
 
   return (
     <div className="page">

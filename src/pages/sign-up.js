@@ -1,9 +1,12 @@
-import React from "react";
-import {register} from '../utils/auth'
+import React, { useState } from "react";
+import {register} from '../utils/auth';
+import Header from "../components/Header";
+import {useNavigate} from 'react-router-dom';
 
 function Register() {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const history = useNavigate();
 
     const handleChangeEmail = (e) => {
         setEmail(e.target.value);
@@ -23,7 +26,7 @@ function Register() {
           .then(() => {
             // setFlag(true);
             // setIsInfoUser(true);
-            // history.push('./sing-in');
+            history('/sign-in');
           })
           .catch((err) => {
             // setFlag(flag);
@@ -33,6 +36,8 @@ function Register() {
       }
 
     return (
+        <>
+        <Header />
         <div className="registr">
             <form className="registr__container" onSubmit={handleSubmit}>
                 <h2 className="registr__name">Регистрация</h2>
@@ -49,6 +54,7 @@ function Register() {
                  {/* <div className="registr__text">Уже зарегистрированы?<Link className="registr__enter" to="/sign-in"></Link></div> */}
             </form>
         </div>
+        </>
     )
 }
 export default Register;

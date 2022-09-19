@@ -1,6 +1,7 @@
 import React from "react";
 import {autorization} from '../utils/auth';
-import {useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom';
+import Header from "../components/Header";
 
 
 function Login() {
@@ -38,6 +39,8 @@ function Login() {
       }
 
     return (
+        <>
+        <Header />
         <div className="registr">
             <form className="registr__container" onSubmit={handleSubmit}>
                 <h2 className="registr__name">Вход</h2>
@@ -52,6 +55,7 @@ function Login() {
                 <button className="registr__button-submit" type="submit">Войти</button>
             </form>
         </div>
+        </>
     )
 }
 export default Login;

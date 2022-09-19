@@ -34,15 +34,15 @@ export const autorization = (email, password) => {
         })
 }
 
-// export const restContent = (token) => {
-//     return fetch(`${BASE_URL}/users/me`, {
-//         method: 'GET',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Authorization': `Bearer ${token}`
-//         }
-//     })
-//             .then((response) => {
-//                 return response.ok ? response.json() : Promise.reject(response.status)
-//             })
-//     }
+export const restContent = (token) => {
+    return fetch(`${BASE_URL}/users/me`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+            .then((response) => {
+                return response.ok ? response.json() : Promise.reject(response.status)
+            })
+    }
