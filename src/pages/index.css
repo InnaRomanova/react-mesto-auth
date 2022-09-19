@@ -51,3 +51,11 @@
 @import url(../blocks/form/__button/_disabled/form__button_disabled.css);
 @import url(../blocks/form/__item-error/form__item-error.css);
 @import url(../blocks/form/__item-error/_visible/form__item-error_visible.css);
+@import url(../blocks/registr/registr.css);
+@import url(../blocks/registr/__container/registr__container.css);
+@import url(../blocks/registr/__name/registr__name.css);
+@import url(../blocks/registr/__field/registr__field.css);
+@import url(../blocks/registr/__item/registr__item.css);
+@import url(../blocks/registr/__error/registr__error.css);
+@import url(../blocks/registr/__button-submit/registr__button-submit.css);
+@import url(../blocks/registr/__text/registr__text.css);

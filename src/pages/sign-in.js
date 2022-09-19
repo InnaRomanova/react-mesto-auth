@@ -39,13 +39,13 @@ function Login() {
 
     return (
         <div className="registr">
-            <form className="registr__conteiner" onSubmit={handleSubmit}>
+            <form className="registr__container" onSubmit={handleSubmit}>
                 <h2 className="registr__name">Вход</h2>
                 <fieldset className="registr__field">
                     <input className="registr__item" placeholder="Email" name="email" type="email" required=""
                         onChange={handleChangeEmail} />
                     <span className="registr__error" />
-                    <input className="registr__" placeholder="Пароль" name="password" type="password" required=""
+                    <input className="registr__item" placeholder="Пароль" name="password" type="password" required=""
                         onChange={handleChangePassword} />
                     <span className="registr__error" />
                 </fieldset>
