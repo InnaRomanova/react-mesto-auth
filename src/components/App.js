@@ -28,7 +28,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [deleteCard, setDeleteCard] = useState(false);
   const [userEmail, setUserEmail] = useState('');
-  const [userId, setUserid] = useState('');
+  const [userId, setUserId] = useState('');
 
   const BASE_URL = 'https://auth.nomoreparties.co';
 
@@ -193,8 +193,6 @@ function App() {
       console.log()
     }
   }
-
-
 
   return (
     <div className="page">

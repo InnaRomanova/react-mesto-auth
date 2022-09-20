@@ -10,3 +10,12 @@
     text-align: center;
     color: #FFFFFF;
 }
+
+@media screen and (max-width: 430px) {
+    .registr__name {
+        height: 24px;
+        font-size: 20px;
+        line-height: 24px;
+
+    }
+}

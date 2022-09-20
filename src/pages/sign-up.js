@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { register } from '../utils/auth';
 import Header from "../components/Header";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Register() {
     const [email, setEmail] = React.useState('');
@@ -27,7 +27,7 @@ function Register() {
                 // setFlag(true);
                 // setIsInfoUser(true);
                 setOpenModal(true);
-                // history('/sign-in');
+                history('/sign-in');
             })
             .catch((err) => {
                 // setFlag(flag);
@@ -39,21 +39,20 @@ function Register() {
     return (
         <>
             <Header />
-
             {openModal && <p>Modal</p>}
             <div className="registr">
                 <form className="registr__container" onSubmit={handleSubmit}>
                     <h2 className="registr__name">Регистрация</h2>
-                    <fieldset className="registr__field">
+                    <div className="registr__field">
                         <input className="registr__item" placeholder="Email" name="email" type="email" required=""
                             onChange={handleChangeEmail} />
                         <span className="registr__error" />
                         <input className="registr__item" placeholder="Пароль" name="password" type="password" required=""
                             onChange={handleChangePassword} />
                         <span className="registr__error" />
-                    </fieldset>
+                    </div>
                     <button className="registr__button-submit" type="submit">Зарегистрироваться</button>
-                    <p className="registr__text">Уже зарегистрированы? Войти</p>
+                    <div className="registr__text">Уже зарегистрированы? <Link to="/sign-in" className="registr__enter">Войти</Link></div>
                     {/* <div className="registr__text">Уже зарегистрированы?<Link className="registr__enter" to="/sign-in"></Link></div> */}
                 </form>
             </div>

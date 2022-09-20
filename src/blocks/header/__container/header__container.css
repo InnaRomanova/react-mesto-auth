@@ -1,0 +1,25 @@
+.header__container {
+    margin: 8px 0 0 0;
+    padding: 0;
+    display: flex;
+    /* justify-content: end; */
+    height: 22px;
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 122%;
+    text-align: right;
+    color: #FFFFFF;
+}
+
+@media screen and (max-width: 1083px) {
+    .header__container {
+        margin-right: 30px;
+        height: 17px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+
+    }
+}

@@ -4,8 +4,6 @@
     background: #FFFFFF;
     border: none;
     border-radius: 2px;
-    /* width: 190px; */
-    /* height: 22px; */
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -13,6 +11,21 @@
     line-height: 22px;
     text-align: center;
     color: #000000;
-    margin: 186px 0 15px 0;
+    margin: 185px 0 16px 0;
     padding: 0;
+}
+
+.registr__button-submit:hover {
+    opacity: 0.85;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 430px) {
+    .registr__button-submit {
+        margin-top: 142px;
+        margin-bottom: 20px;
+        height: 46px;
+        font-size: 16px;
+        line-height: 19px;
+    }
 }
