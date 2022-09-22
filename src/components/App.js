@@ -194,11 +194,13 @@ function App() {
     }
   }
 
+
+
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page__wrapper">
-          <Header userEmail={userEmail}/>
+          <Header userEmail={userEmail} setUserEmail={setUserEmail}/>
           <Main onEditAvatar={handleEditAvatarClick}
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}

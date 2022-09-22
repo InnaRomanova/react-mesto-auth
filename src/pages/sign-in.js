@@ -1,6 +1,6 @@
 import React from "react";
 import {autorization} from '../utils/auth';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useLocation} from 'react-router-dom';
 import Header from "../components/Header";
 
 
@@ -8,6 +8,8 @@ function Login() {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const history = useNavigate();
+    const location = useLocation();
+    const fromPage=location.state?.from?.pathname||"/"
 
     const handleChangeEmail = (e) => {
         setEmail(e.target.value);
@@ -54,6 +56,7 @@ function Login() {
                 </div>
                 <button className="registr__button-submit" type="submit">Войти</button>
             </form>
+            {fromPage}
         </div>
         </>
     )

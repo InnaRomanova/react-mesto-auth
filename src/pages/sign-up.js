@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { register } from '../utils/auth';
 import Header from "../components/Header";
 import { useNavigate, Link } from 'react-router-dom';
+import InfoTooltip from "../components/InfoTooltip";
 
 function Register() {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const history = useNavigate();
+    const [flag, setFlag] = useState(false);
 
     const handleChangeEmail = (e) => {
         setEmail(e.target.value);
@@ -23,23 +25,36 @@ function Register() {
 
     const handleRegisterSubmit = (email, password) => {
         register(email, password)
-            .then(() => {
-                // setFlag(true);
+            .then((data) => {
+                console.log(data)
+                setFlag(true);
+                
                 // setIsInfoUser(true);
                 setOpenModal(true);
-                history('/sign-in');
+                setTimeout(() => {
+                    history('/sign-in');
+                  }, 2000);
+                // history('/sign-in');
             })
             .catch((err) => {
+                setOpenModal(true);
+                console.log('nnnnn')
+                setFlag(false);
                 // setFlag(flag);
                 // setIsInfoUser(true);
                 console.error(err);
             });
     }
     const [openModal, setOpenModal] = useState(false);
+
+    useEffect(() => {
+
+    },[openModal])
+
     return (
         <>
             <Header />
-            {openModal && <p>Modal</p>}
+            {openModal && <InfoTooltip isOpen={openModal} setOpenModal={setOpenModal} flag = {flag}/>}
             <div className="registr">
                 <form className="registr__container" onSubmit={handleSubmit}>
                     <h2 className="registr__name">Регистрация</h2>
@@ -53,7 +68,6 @@ function Register() {
                     </div>
                     <button className="registr__button-submit" type="submit">Зарегистрироваться</button>
                     <div className="registr__text">Уже зарегистрированы? <Link to="/sign-in" className="registr__enter">Войти</Link></div>
-                    {/* <div className="registr__text">Уже зарегистрированы?<Link className="registr__enter" to="/sign-in"></Link></div> */}
                 </form>
             </div>
         </>
