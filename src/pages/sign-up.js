@@ -28,7 +28,6 @@ function Register() {
             .then((data) => {
                 console.log(data)
                 setFlag(true);
-                
                 // setIsInfoUser(true);
                 setOpenModal(true);
                 setTimeout(() => {

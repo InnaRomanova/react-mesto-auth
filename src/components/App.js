@@ -1,7 +1,8 @@
 //корневой компонент
 
 import { useEffect, useState } from 'react';
-// import {restContent} from "../utils/auth";
+import {BASE_URL, restContent} from "../utils/auth";
+// import * as auth from "../utils/auth.js";
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
@@ -30,21 +31,21 @@ function App() {
   const [userEmail, setUserEmail] = useState('');
   const [userId, setUserId] = useState('');
 
-  const BASE_URL = 'https://auth.nomoreparties.co';
+  // const BASE_URL = 'https://auth.nomoreparties.co';
 
-  const restContent = (token) => {
-    console.log(token)
-    return fetch(`${BASE_URL}/users/me`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
-    })
-      .then((response) => {
-        return response.ok ? response.json() : Promise.reject(response.status)
-      })
-  }
+  // const restContent = (token) => {
+  //   console.log(token)
+  //   return fetch(`${BASE_URL}/users/me`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': `Bearer ${token}`
+  //     }
+  //   })
+  //     .then((response) => {
+  //       return response.ok ? response.json() : Promise.reject(response.status)
+  //     })
+  // }
 
   const handleCardClick = (card) => {
     setSelectCard(card);
@@ -145,7 +146,6 @@ function App() {
         .then((data) => {
           setUserEmail(data.data.email);
           // setLoggedIn(true);
-          // setUserEmail(data.data.email);
           console.log(data)
           // history.push("/"); 
         })
@@ -194,8 +194,6 @@ function App() {
     }
   }
 
-
-
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -238,6 +236,7 @@ function App() {
           card={selectCard}
           onClose={closeAllPopups}
           onCloseOverlay={closeByOverlay} />
+          {/* <InfoTooltip isOpen={isInfoOpen} onClose={closeAllPopups} flag={flag} /> */}
       </CurrentUserContext.Provider>
     </div>
   );

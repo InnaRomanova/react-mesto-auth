@@ -14,8 +14,7 @@ function ProtectedRoute({ children }) {
         auth = true;
     }
 
-
-        console.log("все здесь не понятно" + localStorage.getItem("jwt"))
+    console.log("все здесь не понятно" + localStorage.getItem("jwt"))
     if (!auth) {
         return <Navigate to='/sign-in' state={{ from: location }} />
     }

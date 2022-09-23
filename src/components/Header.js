@@ -10,12 +10,12 @@ function Header({ userEmail, setUserEmail }) {
     return (
         <header className="header">
             <img className="header__logo" src={logo} alt="логотип" />
-            {/* <div className="header__container"><Link className="header__text" to="/sign-up">Регистрация</Link></div>
-            <div className="header__container"><Link className="header__text" to="/sign-in">Войти</Link></div> */}
+            <div className="header__container"><Link className="header__text" to="/sign-up">Регистрация</Link></div>           
+           
+            {/* <div className="header__container"><Link className="header__text" to="/sign-in">Войти</Link></div> */}
                 
             <div className="header__container">{userEmail}<Link className="header__text" to="/sign-up" onClick={handleSignOut}>
                 Выйти</Link></div>
-           
         </header>
     );
 }
