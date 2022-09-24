@@ -127,17 +127,17 @@ function App() {
     setDeleteCard(false);
   }
 
-  // useEffect(() => {
-  //   Promise.all([newApi.getCards(), newApi.getUserInfo()])
-  //     .then(([cards, userData]) => {
-  //       setCards(cards);
-  //       console.log(userData)
-  //       setСurrentUser(userData)
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     })
-  // }, []);
+  useEffect(() => {
+    Promise.all([newApi.getCards(), newApi.getUserInfo()])
+      .then(([cards, userData]) => {
+        setCards(cards);
+        console.log(userData)
+        setСurrentUser(userData)
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+  }, []);
 
   useEffect(() => {
     if (localStorage.getItem("jwt")) {
