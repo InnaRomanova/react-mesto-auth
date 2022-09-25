@@ -1,0 +1,13 @@
+.registr__field {
+    /* border: 0; */
+    margin: 50px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 430px) {
+    .registr__field {
+       margin-top: 40px;
+    }
+}

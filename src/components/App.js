@@ -1,9 +1,15 @@
 //корневой компонент
 
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import { Routes, useNavigate, Navigate, Route } from 'react-router-dom';
 import * as auth from '../utils/auth.js';
+=======
+import { useEffect, useState } from 'react';
+import {BASE_URL, restContent} from "../utils/auth";
+// import * as auth from "../utils/auth.js";
+>>>>>>> dev
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
@@ -14,11 +20,17 @@ import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
 import AddPlacePopup from './AddPlacePopup.js';
 import RemoveCardPopup from './RemoveCardPopup.js';
+<<<<<<< HEAD
 import Login from './Login.js';
 import Register from './Register.js';
 import ProtectedRoute from './ProtectedRoute.js';
 import InfoTooltip from './InfoTooltip.js';
 
+=======
+import { BrowserRouter as Router, Switch, Route, Link, Routes } from "react-router-dom";
+import SignIn from '../pages/sign-in.js';
+import SignUp from '../pages/sign-up.js';
+>>>>>>> dev
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarClick] = useState(false);
@@ -31,10 +43,30 @@ function App() {
   const [cards, setCards] = useState([]);
   const [deleteCard, setDeleteCard] = useState(false);
   const [userEmail, setUserEmail] = useState('');
+<<<<<<< HEAD
   const [flag, setFlag] = useState(false);
   const [isInfoUser, setIsInfoUser] = useState(false);
   const [loginIn, setLoginIn] = useState('');
   const history = useNavigate();
+=======
+  const [userId, setUserId] = useState('');
+
+  // const BASE_URL = 'https://auth.nomoreparties.co';
+
+  // const restContent = (token) => {
+  //   console.log(token)
+  //   return fetch(`${BASE_URL}/users/me`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': `Bearer ${token}`
+  //     }
+  //   })
+  //     .then((response) => {
+  //       return response.ok ? response.json() : Promise.reject(response.status)
+  //     })
+  // }
+>>>>>>> dev
 
   const handleCardClick = (card) => {
     setSelectCard(card);
@@ -174,12 +206,31 @@ function App() {
     Promise.all([newApi.getCards(), newApi.getUserInfo()])
       .then(([cards, userData]) => {
         setCards(cards);
+        console.log(userData)
         setСurrentUser(userData)
       })
       .catch((err) => {
         console.error(err);
       })
   }, [loginIn]);
+
+  useEffect(() => {
+    if (localStorage.getItem("jwt")) {
+      const jwt = localStorage.getItem("jwt");
+      restContent(jwt)
+        .then((data) => {
+          setUserEmail(data.data.email);
+          // setLoggedIn(true);
+          console.log(data)
+          // history.push("/"); 
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+    } else {
+      console.log('a')
+    }
+  }, [localStorage])
 
   const closeByEsc = (e) => {
     if (e.key === 'Escape') {
@@ -200,10 +251,29 @@ function App() {
     return () => (document.removeEventListener('keydown', closeByEsc));
   }, [isAddPlacePopupOpen, isEditAvatarPopupOpen, isEditProfilePopupOpen, isImagePopupOpened]);
 
+  function checkToken() {
+    if (localStorage.getItem("jwt")) {
+      const jwt = localStorage.getItem("jwt");
+      restContent(jwt)
+        .then((data) => {
+          // setLoggedIn(true);
+          // setUserEmail(data.data.email);
+          console.log(data)
+          // history.push("/"); 
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+    } else {
+      console.log()
+    }
+  }
+
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page__wrapper">
+<<<<<<< HEAD
           <Header email={userEmail} onSignOut={handleSignOut} />
           <Routes>
             <ProtectedRoute
@@ -230,6 +300,19 @@ function App() {
                 {loginIn ? <Navigate to="/main" /> : <Navigate to="/sign-in" />}
               </Route>
           </Routes>
+=======
+          <Header userEmail={userEmail} setUserEmail={setUserEmail}/>
+          <Main onEditAvatar={handleEditAvatarClick}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onCardClick={handleCardClick}
+            cards={cards}
+            setCards={setCards}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
+            onDeletePopup={setisRemoveCardPopupOpen}
+            setDeleteCard={setDeleteCard} />
+>>>>>>> dev
           <Footer />
         </div>
         <EditProfilePopup
@@ -257,7 +340,11 @@ function App() {
           card={selectCard}
           onClose={closeAllPopups}
           onCloseOverlay={closeByOverlay} />
+<<<<<<< HEAD
         <InfoTooltip flag={flag} isOpen={isInfoUser} onClose={closeAllPopups}/>
+=======
+          {/* <InfoTooltip isOpen={isInfoOpen} onClose={closeAllPopups} flag={flag} /> */}
+>>>>>>> dev
       </CurrentUserContext.Provider>
     </div>
   );

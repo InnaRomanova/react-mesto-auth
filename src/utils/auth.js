@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 export const BASE_URL = 'https://auth.nomoreparties.co/';
 
 export const register = (email, password) => {
     return fetch(`${BASE_URL}signup`, {
+=======
+export const BASE_URL = 'https://auth.nomoreparties.co';
+
+export const register = (email, password) => {
+    return fetch(`${BASE_URL}/signup`, {
+>>>>>>> dev
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -18,7 +25,11 @@ export const register = (email, password) => {
 }
 
 export const autorization = (email, password) => {
+<<<<<<< HEAD
     return fetch(`${BASE_URL}signin`, {
+=======
+    return fetch(`${BASE_URL}/signin`, {
+>>>>>>> dev
         method: 'POST',
         headers: {
             'Accept': 'application/json',
