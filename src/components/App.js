@@ -1,7 +1,7 @@
 //корневой компонент
 
 import { useEffect, useState } from 'react';
-import {BASE_URL, restContent} from "../utils/auth";
+// import {BASE_URL, restContent} from "../utils/auth";
 // import * as auth from "../utils/auth.js";
 import Header from './Header.js';
 import Main from './Main.js';
@@ -31,21 +31,21 @@ function App() {
   const [userEmail, setUserEmail] = useState('');
   const [userId, setUserId] = useState('');
 
-  // const BASE_URL = 'https://auth.nomoreparties.co';
+  const BASE_URL = 'https://auth.nomoreparties.co';
 
-  // const restContent = (token) => {
-  //   console.log(token)
-  //   return fetch(`${BASE_URL}/users/me`, {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': `Bearer ${token}`
-  //     }
-  //   })
-  //     .then((response) => {
-  //       return response.ok ? response.json() : Promise.reject(response.status)
-  //     })
-  // }
+  const restContent = (token) => {
+    console.log(token)
+    return fetch(`${BASE_URL}/users/me`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then((response) => {
+        return response.ok ? response.json() : Promise.reject(response.status)
+      })
+  }
 
   const handleCardClick = (card) => {
     setSelectCard(card);

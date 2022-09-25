@@ -31,7 +31,7 @@ function Header({ userEmail, setUserEmail }) {
                 <Link className="header__text" to="/sign-up">Регистрация</Link></div>}
             {location.pathname === '/sign-up' && <div className="header__container">
                 <Link className="header__text" to="/sign-in">Войти</Link></div>}
-            {!matches ? (<div className='menu' onClick={handleShow}><MobileMenu /></div>) : (<div>{userEmail === undefined ? (<></>)
+            {!matches ? (<div className='header__menu' onClick={handleShow}><MobileMenu /></div>) : (<div>{userEmail === undefined ? (<></>)
                 : (<div className="header__container">{userEmail}<Link className="header__text" to="/sign-up" onClick={handleSignOut}>
                     Выйти</Link></div>)}
             </div>)}

@@ -1,5 +1,5 @@
 .header__container {
-    margin: 8px 0 0 0;
+    margin: 8px 2px 0 auto;
     padding: 0;
     display: flex;
     /* justify-content: end; */
@@ -14,6 +14,12 @@
 }
 
 @media screen and (max-width: 1083px) {
+.header__container {
+    margin-right: 34px;
+}
+}
+
+@media screen and (max-width: 430px) {
     .header__container {
         margin-right: 30px;
         height: 17px;
