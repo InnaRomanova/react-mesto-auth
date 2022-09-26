@@ -1,4 +1,5 @@
-export const BASE_URL = 'https://auth.nomoreparties.co/';
+export const BASE_URL = 'https://auth.nomoreparties.co';
+// const BASE = 'https://mesto.nomoreparties.co/v1'
 
 export const register = (email, password) => {
     return fetch(`${BASE_URL}/signup`, {
@@ -36,12 +37,13 @@ export const autorization = (email, password) => {
         })
 }
 
-export const restContent = (token) => {
+export const restContent = () => {
+    console.log(restContent)
     return fetch(`${BASE_URL}/users/me`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': '6317d273-77cd-40e4-acd5-6cbb113af6b1'
         }
     })
             .then((response) => {

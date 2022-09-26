@@ -6,11 +6,14 @@ class Api {
   }
 
   _request(adres, method, info) {
+    console.log('здесь' + this.token)
     const pattern = {
       method: method,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.token}`
+        'Authorization': '6317d273-77cd-40e4-acd5-6cbb113af6b1',
+
+        // `Bearer ${this.token}`
       }
     }
 
