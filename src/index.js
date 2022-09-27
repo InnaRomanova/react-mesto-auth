@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom/client';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import './pages/index.css';
-import { BrowserRouter as Router,  Route,  Routes } from "react-router-dom";
+import { HashRouter as Router,  Route,  Routes } from "react-router-dom";
 import SignIn from '../src/pages/sign-in';
 import SignUp from '../src/pages/sign-up';
 import ProtectedRoute from './components/ProtectedRoute';
