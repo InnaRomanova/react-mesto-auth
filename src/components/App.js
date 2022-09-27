@@ -7,8 +7,12 @@ import { Routes, useNavigate, Navigate, Route } from 'react-router-dom';
 import * as auth from '../utils/auth.js';
 =======
 import { useEffect, useState } from 'react';
+<<<<<<< HEAD
 import {BASE_URL, restContent} from "../utils/auth";
 // import * as auth from "../utils/auth.js";
+>>>>>>> dev
+=======
+import { restContent} from "../utils/auth";
 >>>>>>> dev
 import Header from './Header.js';
 import Main from './Main.js';
@@ -51,6 +55,7 @@ function App() {
 =======
   const [userId, setUserId] = useState('');
 
+<<<<<<< HEAD
   // const BASE_URL = 'https://auth.nomoreparties.co';
 
   // const restContent = (token) => {
@@ -68,6 +73,8 @@ function App() {
   // }
 >>>>>>> dev
 
+=======
+>>>>>>> dev
   const handleCardClick = (card) => {
     setSelectCard(card);
     setIsImagePopupOpened(true);
@@ -96,7 +103,6 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    // const isOwn = card.owner._id === currentUser._id;
     newApi.changeDeleteCardStatus(card._id)
       .then((newCard) => {
         setCards((cards) => cards.filter((c) => c._id !== card._id))
@@ -206,7 +212,6 @@ function App() {
     Promise.all([newApi.getCards(), newApi.getUserInfo()])
       .then(([cards, userData]) => {
         setCards(cards);
-        console.log(userData)
         setСurrentUser(userData)
       })
       .catch((err) => {
@@ -217,18 +222,9 @@ function App() {
   useEffect(() => {
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
-      restContent(jwt)
-        .then((data) => {
-          setUserEmail(data.data.email);
-          // setLoggedIn(true);
-          console.log(data)
-          // history.push("/"); 
-        })
-        .catch((err) => {
-          console.error(err);
-        })
+      const dataEmail = localStorage.getItem("email");
+      setUserEmail(dataEmail);
     } else {
-      console.log('a')
     }
   }, [localStorage])
 
@@ -256,16 +252,11 @@ function App() {
       const jwt = localStorage.getItem("jwt");
       restContent(jwt)
         .then((data) => {
-          // setLoggedIn(true);
-          // setUserEmail(data.data.email);
-          console.log(data)
-          // history.push("/"); 
         })
         .catch((err) => {
           console.error(err);
         })
     } else {
-      console.log()
     }
   }
 
@@ -341,9 +332,12 @@ function App() {
           onClose={closeAllPopups}
           onCloseOverlay={closeByOverlay} />
 <<<<<<< HEAD
+<<<<<<< HEAD
         <InfoTooltip flag={flag} isOpen={isInfoUser} onClose={closeAllPopups}/>
 =======
           {/* <InfoTooltip isOpen={isInfoOpen} onClose={closeAllPopups} flag={flag} /> */}
+>>>>>>> dev
+=======
 >>>>>>> dev
       </CurrentUserContext.Provider>
     </div>

@@ -20,7 +20,7 @@ root.render(
     <Router>
             <div>
               <Routes>
-                <Route path="/" element={<ProtectedRoute><App /></ProtectedRoute>} />
+                <Route path="/" element={<App />} />
                 <Route path="/sign-in" element={<SignIn />} />
                 <Route path="/sign-up" element={<SignUp />} />
                 </Routes>

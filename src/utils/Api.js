@@ -10,7 +10,7 @@ class Api {
       method: method,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.token}`
+        'Authorization': this._token,
       }
     }
 
@@ -19,7 +19,6 @@ class Api {
       info ? { ...pattern, body: JSON.stringify(info) } : pattern
     )
       .then(res => {
-        console.log(localStorage.jwt)
         if (res.ok) {
           return res.json()
         } else {
