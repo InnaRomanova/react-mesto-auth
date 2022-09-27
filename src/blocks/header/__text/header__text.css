@@ -13,8 +13,10 @@
     text-decoration: none;
 }
 
-@media screen and (max-width: 379px) {
+@media screen and (max-width: 580px) {
     .header__text {
+        margin-left: 0;
         width: 56px;
+        margin-top: 18px;
     }
 }

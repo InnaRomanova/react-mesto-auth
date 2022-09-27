@@ -13,19 +13,22 @@
     color: #FFFFFF;
 }
 
-@media screen and (max-width: 1083px) {
-.header__container {
-    margin-right: 34px;
-}
-}
-
-@media screen and (max-width: 430px) {
+/* @media screen and (max-width: 1083px) {
     .header__container {
-        margin-right: 30px;
+        margin-right: 34px;
+    }
+} */
+
+@media screen and (max-width: 580px) {
+    .header__container {
+        margin-right: 0;
+        margin-left: 0;
         height: 17px;
         font-weight: 400;
         font-size: 14px;
         line-height: 17px;
-
+        margin-top: 40px;
+        flex-flow: column;
+        align-items: center;
     }
 }

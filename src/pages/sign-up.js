@@ -26,28 +26,21 @@ function Register() {
     const handleRegisterSubmit = (email, password) => {
         register(email, password)
             .then((data) => {
-                console.log(data)
                 setFlag(true);
-                // setIsInfoUser(true);
                 setOpenModal(true);
                 setTimeout(() => {
                     history('/sign-in');
                   }, 2000);
-                // history('/sign-in');
             })
             .catch((err) => {
                 setOpenModal(true);
-                console.log('nnnnn')
                 setFlag(false);
-                // setFlag(flag);
-                // setIsInfoUser(true);
                 console.error(err);
             });
     }
     const [openModal, setOpenModal] = useState(false);
 
     useEffect(() => {
-
     },[openModal])
 
     return (

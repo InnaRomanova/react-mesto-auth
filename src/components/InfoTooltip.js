@@ -5,7 +5,6 @@ function InfoTooltip({setOpenModal, isOpen, flag}) {
     return(
         <div className={`popup  ${isOpen && 'popup_opened'}`}>
             <div className="popup__block">
-                {/* <div className='popup__info-tooltip'> */}
                 <button
                     className="popup__close-button"
                     aria-label="закрыть"
@@ -15,7 +14,6 @@ function InfoTooltip({setOpenModal, isOpen, flag}) {
                     <img className="popup__tooltip-img" alt="#" src={`${flag ? success : errors}`}/>
                     <h2 className="popup__subtitle">{`${flag ? "Вы успешно зарегистрировались!" : 
                     "Что-то пошло не так! Попробуйте еще раз." }`}</h2>
-                    {/* </div> */}
                     </div>
         </div>
     )

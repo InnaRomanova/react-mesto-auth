@@ -27,19 +27,14 @@ function Login() {
     const handleLoginSubmit = (email, password) => {
         autorization(email, password)
         .then((data) => {
-            
           localStorage.setItem('jwt', data.token);
-        //   setLoginIn(true);
           setEmail(email);
           localStorage.setItem('email', email);
-          console.log(localStorage)
           setTimeout(() => {
             history('/');
           }, 2000);
         })
         .catch((err) => {
-        //   setFlag(flag);
-        //   setIsInfoUser(true);
           console.error(err);
         });
       }

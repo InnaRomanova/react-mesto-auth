@@ -1,8 +1,7 @@
 //корневой компонент
 
 import { useEffect, useState } from 'react';
-import {BASE_URL, restContent} from "../utils/auth";
-// import * as auth from "../utils/auth.js";
+import { restContent} from "../utils/auth";
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
@@ -30,22 +29,6 @@ function App() {
   const [deleteCard, setDeleteCard] = useState(false);
   const [userEmail, setUserEmail] = useState('');
   const [userId, setUserId] = useState('');
-
-  // const BASE_URL = 'https://auth.nomoreparties.co';
-
-  // const restContent = (token) => {
-  //   console.log(token)
-  //   return fetch(`${BASE_URL}/users/me`, {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': `Bearer ${token}`
-  //     }
-  //   })
-  //     .then((response) => {
-  //       return response.ok ? response.json() : Promise.reject(response.status)
-  //     })
-  // }
 
   const handleCardClick = (card) => {
     setSelectCard(card);
@@ -75,7 +58,6 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    // const isOwn = card.owner._id === currentUser._id;
     newApi.changeDeleteCardStatus(card._id)
       .then((newCard) => {
         setCards((cards) => cards.filter((c) => c._id !== card._id))
@@ -131,7 +113,6 @@ function App() {
     Promise.all([newApi.getCards(), newApi.getUserInfo()])
       .then(([cards, userData]) => {
         setCards(cards);
-        console.log(userData)
         setСurrentUser(userData)
       })
       .catch((err) => {
@@ -144,18 +125,7 @@ function App() {
       const jwt = localStorage.getItem("jwt");
       const dataEmail = localStorage.getItem("email");
       setUserEmail(dataEmail);
-      // restContent()
-      //   .then((data) => {
-          
-      //     // setLoggedIn(true);
-      //     console.log('локал')
-      //     // history.push("/"); 
-        // })
-        // .catch((err) => {
-        //   console.error(err);
-        // })
     } else {
-      console.log('a')
     }
   }, [localStorage])
 
@@ -183,22 +153,16 @@ function App() {
       const jwt = localStorage.getItem("jwt");
       restContent(jwt)
         .then((data) => {
-          // setLoggedIn(true);
-          // setUserEmail(data.data.email);
-          console.log(data)
-          // history.push("/"); 
         })
         .catch((err) => {
           console.error(err);
         })
     } else {
-      console.log()
     }
   }
 
   return (
     <div className="page">
-      {console.log(userEmail)}
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page__wrapper">
           <Header userEmail={userEmail} setUserEmail={setUserEmail}/>
@@ -239,7 +203,6 @@ function App() {
           card={selectCard}
           onClose={closeAllPopups}
           onCloseOverlay={closeByOverlay} />
-          {/* <InfoTooltip isOpen={isInfoOpen} onClose={closeAllPopups} flag={flag} /> */}
       </CurrentUserContext.Provider>
     </div>
   );
