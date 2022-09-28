@@ -1,8 +1,7 @@
 //корневой компонент
 
 import { useEffect, useState } from 'react';
-import { restContent, register, autorization } from "../utils/auth";
-import { useNavigate } from 'react-router-dom';
+import { restContent } from "../utils/auth";
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
@@ -23,14 +22,9 @@ function App() {
   const [selectCard, setSelectCard] = useState({});
   const [currentUser, setСurrentUser] = useState({});
   const [cards, setCards] = useState([]);
-  const [deleteCard, setDeleteCard] = useState(false);
+  const [deletedCard, setDeletedCard] = useState(false);
   const [userEmail, setUserEmail] = useState('');
-  // const [email, setEmail] = React.useState('');
   const [isLogged, setIsLogged] = useState(false);
-  const [flag, setFlag] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
-  const history = useNavigate();
-  const [userId, setUserId] = useState('');
 
   const handleCardClick = (card) => {
     setSelectCard(card);
@@ -108,11 +102,11 @@ function App() {
     setIsImagePopupOpened(false);
     setisRemoveCardPopupOpen(false);
     setSelectCard({});
-    setDeleteCard(false);
+    setDeletedCard(false);
   }
 
   useEffect(() => {
-    Promise.all([newApi.getCards(), newApi.getUserInfo()])
+    {isLogged && Promise.all([newApi.getCards(), newApi.getUserInfo()])
       .then(([cards, userData]) => {
         setCards(cards);
         setСurrentUser(userData)
@@ -120,7 +114,7 @@ function App() {
       .catch((err) => {
         console.error(err);
       })
-  }, [isLogged]);
+  }}, [isLogged])
 
   useEffect(() => {
     if (localStorage.getItem("jwt")) {
@@ -129,78 +123,13 @@ function App() {
       restContent(jwt)
         .then(() => {
           setUserEmail(dataEmail);
+          setIsLogged(true);
         })
         .catch((err) => {
           console.error(err);
         })
     }
   }, [])
-
-  function handleRegister(email, password) {
-    register(email, password)
-      .then((data) => {
-        setFlag(true);
-        setOpenModal(true);
-        setTimeout(() => {
-          history('/sign-in');
-        }, 2000);
-      })
-      .catch((err) => {
-        setOpenModal(true);
-        setFlag(false);
-        console.error(err);
-      });
-  }
-
-  function handleLogin(email, password) {
-    autorization(email, password)
-      .then((data) => {
-        localStorage.setItem('jwt', data.token);
-        setIsLogged(true);
-        localStorage.setItem('email', email);
-        setTimeout(() => {
-          history('/');
-          setUserEmail(email)
-        }, 2000);
-      })
-      .catch((err) => {
-        // setFlag(false);
-        // setOpenModal(true);
-        console.error(err);
-      })
-  }
-
-  const closeByOverlay = (e) => {
-    if (e.target.classList.contains('popup_opened')) {
-      closeAllPopups()
-    }
-  }
-
-  useEffect(() => {
-    const closeByEsc = (e) => {
-      if (e.key === 'Escape') {
-        closeAllPopups()
-      }
-    }
-
-    if (isAddPlacePopupOpen || isEditAvatarPopupOpen || isEditProfilePopupOpen || isImagePopupOpened) {
-      document.addEventListener('keydown', closeByEsc);
-    }
-    return () => (document.removeEventListener('keydown', closeByEsc));
-  }, [isAddPlacePopupOpen, isEditAvatarPopupOpen, isEditProfilePopupOpen, isImagePopupOpened]);
-
-  function checkToken() {
-    if (localStorage.getItem("jwt")) {
-      const jwt = localStorage.getItem("jwt");
-      restContent(jwt)
-        .then((data) => {
-        })
-        .catch((err) => {
-          console.error(err);
-        })
-    } else {
-    }
-  }
 
   return (
     <div className="page">
@@ -219,7 +148,7 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
             onDeletePopup={setisRemoveCardPopupOpen}
-            setDeleteCard={setDeleteCard} 
+            setDeletedCard={setDeletedCard} 
             />
           <Footer />
         </div>
@@ -227,27 +156,27 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
-          onCloseOverlay={closeByOverlay} />
+           />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
-          onCloseOverlay={closeByOverlay} />
+           />
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
-          onCloseOverlay={closeByOverlay} />
+           />
         <RemoveCardPopup
           isOpen={isRemoveCardPopupOpen}
           onClose={closeAllPopups}
           onRemoveCardPopup={handleCardDelete}
-          deleteCard={deleteCard}
-          onCloseOverlay={closeByOverlay} />
+          deletedCard={deletedCard}
+           />
         <ImagePopup
           card={selectCard}
           onClose={closeAllPopups}
-          onCloseOverlay={closeByOverlay} />
+           />
       </CurrentUserContext.Provider>
     </div>
   );

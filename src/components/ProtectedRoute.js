@@ -12,7 +12,9 @@ function ProtectedRoute({ children }) {
     }
 
     if (!auth) {
-        return <Navigate to='/sign-in' state={{ from: location }} />
+        return <Navigate to='/sign-in' 
+        state={{ from: location }} 
+        />
     }
     return children
 }

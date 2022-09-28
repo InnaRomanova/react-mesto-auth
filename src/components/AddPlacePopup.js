@@ -1,7 +1,7 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
-function AddPlacePopup({ isOpen, onClose, onAddPlace, onCloseOverlay}) {
+function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
   const cardRefName = React.useRef()
   const cardRefLink = React.useRef()
 
@@ -12,11 +12,13 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, onCloseOverlay}) {
       name: cardRefName.current.value,
       link: cardRefLink.current.value
     });
+    cardRefLink.current.value = '';
+    cardRefName.current.value = '';
   }
-  
+
   return (
     <PopupWithForm isOpen={isOpen} name="addPhoto" onClose={onClose}
-    onSubmit={handleSubmit} onCloseOverlay={onCloseOverlay}>
+      onSubmit={handleSubmit} >
       <div
         className="form"
         id="form_photo"

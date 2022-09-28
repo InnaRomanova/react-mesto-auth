@@ -7,10 +7,7 @@ import CloseButton from './elements/CloseButton';
 
 function Header({ userEmail, setUserEmail }) {
     const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
     const handleShow = () => setShow(!show);
-
     const matches = useMediaQuery('(min-width: 600px)')
     let location = useLocation();
 
@@ -23,7 +20,7 @@ function Header({ userEmail, setUserEmail }) {
             {show && <div onClick={() => setShow(false)} className="header__burger">
                 <div>{userEmail === undefined ? (<></>)
                     : (<div className="header__container">{userEmail}
-                        <Link className="header__text" to="/sign-up" onClick={handleSignOut}>
+                        <Link className="header__text" to="/sign-in" onClick={handleSignOut}>
                             Выйти</Link></div>)}
                 </div></div>}
             <header className="header">
@@ -34,7 +31,7 @@ function Header({ userEmail, setUserEmail }) {
                     {matches && <Link className="header__text" to="/sign-in">Войти</Link>}</div>}
                 {!matches ? (<div className='header__menu' onClick={handleShow}>{show ? (<CloseButton />) :
                     (<MobileMenu />)}</div>) : (<div>{userEmail === undefined ? (<></>)
-                        : (<div className="header__container">{userEmail}<Link className="header__text" to="/sign-up" onClick={handleSignOut}>
+                        : (<div className="header__container">{userEmail}<Link className="header__text" to="/sign-in" onClick={handleSignOut}>
                             Выйти</Link></div>)}
                     </div>)}
             </header>
