@@ -12,7 +12,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, onCloseOverlay }) {
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
 
   // Обработчик изменения инпута обновляет стейт
   function handleChangeName(e) {

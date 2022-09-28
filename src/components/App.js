@@ -1,11 +1,11 @@
 //корневой компонент
 
 import { useEffect, useState } from 'react';
-import { restContent} from "../utils/auth";
+import { restContent, register, autorization } from "../utils/auth";
+import { useNavigate } from 'react-router-dom';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
-import PopupWithForm from './PopupWithForm.js'
 import ImagePopup from './ImagePopup.js';
 import newApi from '../utils/Api';
 import EditProfilePopup from './EditProfilePopup.js';
@@ -13,9 +13,6 @@ import EditAvatarPopup from './EditAvatarPopup.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import AddPlacePopup from './AddPlacePopup.js';
 import RemoveCardPopup from './RemoveCardPopup.js';
-import { BrowserRouter as Router, Switch, Route, Link, Routes } from "react-router-dom";
-import SignIn from '../pages/sign-in.js';
-import SignUp from '../pages/sign-up.js';
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarClick] = useState(false);
@@ -28,6 +25,11 @@ function App() {
   const [cards, setCards] = useState([]);
   const [deleteCard, setDeleteCard] = useState(false);
   const [userEmail, setUserEmail] = useState('');
+  // const [email, setEmail] = React.useState('');
+  const [isLogged, setIsLogged] = useState(false);
+  const [flag, setFlag] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const history = useNavigate();
   const [userId, setUserId] = useState('');
 
   const handleCardClick = (card) => {
@@ -118,21 +120,54 @@ function App() {
       .catch((err) => {
         console.error(err);
       })
-  }, []);
+  }, [isLogged]);
 
   useEffect(() => {
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
       const dataEmail = localStorage.getItem("email");
-      setUserEmail(dataEmail);
-    } else {
+      restContent(jwt)
+        .then(() => {
+          setUserEmail(dataEmail);
+        })
+        .catch((err) => {
+          console.error(err);
+        })
     }
-  }, [localStorage])
+  }, [])
 
-  const closeByEsc = (e) => {
-    if (e.key === 'Escape') {
-      closeAllPopups()
-    }
+  function handleRegister(email, password) {
+    register(email, password)
+      .then((data) => {
+        setFlag(true);
+        setOpenModal(true);
+        setTimeout(() => {
+          history('/sign-in');
+        }, 2000);
+      })
+      .catch((err) => {
+        setOpenModal(true);
+        setFlag(false);
+        console.error(err);
+      });
+  }
+
+  function handleLogin(email, password) {
+    autorization(email, password)
+      .then((data) => {
+        localStorage.setItem('jwt', data.token);
+        setIsLogged(true);
+        localStorage.setItem('email', email);
+        setTimeout(() => {
+          history('/');
+          setUserEmail(email)
+        }, 2000);
+      })
+      .catch((err) => {
+        // setFlag(false);
+        // setOpenModal(true);
+        console.error(err);
+      })
   }
 
   const closeByOverlay = (e) => {
@@ -142,6 +177,12 @@ function App() {
   }
 
   useEffect(() => {
+    const closeByEsc = (e) => {
+      if (e.key === 'Escape') {
+        closeAllPopups()
+      }
+    }
+
     if (isAddPlacePopupOpen || isEditAvatarPopupOpen || isEditProfilePopupOpen || isImagePopupOpened) {
       document.addEventListener('keydown', closeByEsc);
     }
@@ -165,8 +206,11 @@ function App() {
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page__wrapper">
-          <Header userEmail={userEmail} setUserEmail={setUserEmail}/>
-          <Main onEditAvatar={handleEditAvatarClick}
+          <Header
+            userEmail={userEmail}
+            setUserEmail={setUserEmail} />
+          <Main
+            onEditAvatar={handleEditAvatarClick}
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
             onCardClick={handleCardClick}
@@ -175,7 +219,8 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
             onDeletePopup={setisRemoveCardPopupOpen}
-            setDeleteCard={setDeleteCard} />
+            setDeleteCard={setDeleteCard} 
+            />
           <Footer />
         </div>
         <EditProfilePopup

@@ -25,8 +25,7 @@ function PopupWithForm({ name, title, children, isOpen, onClose, buttonText, onS
                     name={name}
                     onSubmit={onSubmit}
                     method="post"
-                    action="#"
-                    noValidate="">
+                    action="#">
                     <h2 className="form__title">{title}</h2>
                     {children}
                     <button

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { register } from '../utils/auth';
-import Header from "../components/Header";
+import Header from "./Header";
 import { useNavigate, Link } from 'react-router-dom';
-import InfoTooltip from "../components/InfoTooltip";
+import InfoTooltip from "./InfoTooltip";
 
 function Register() {
     const [email, setEmail] = React.useState('');
