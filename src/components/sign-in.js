@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { register } from '../utils/auth';
-import Header from "../components/Header";
-import { useNavigate, Link } from 'react-router-dom';
-import InfoTooltip from "../components/InfoTooltip";
+import React, { useState, useEffect } from "react";
+import { autorization } from '../utils/auth';
+import { useNavigate, useLocation } from 'react-router-dom';
+import Header from "./Header";
+import InfoTooltip from "./InfoTooltip";
 
-function Register() {
+function Login() {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const history = useNavigate();
-    const [flag, setFlag] = useState(false);
+    const location = useLocation();
+    const fromPage = location.state?.from?.pathname || "/";
+   const [openModal, setOpenModal] = useState(false);
+   const [flag, setFlag] = useState(false);
 
     const handleChangeEmail = (e) => {
         setEmail(e.target.value);
@@ -20,17 +23,18 @@ function Register() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        handleRegisterSubmit(email, password)
+        handleLoginSubmit(email, password)
     }
 
-    const handleRegisterSubmit = (email, password) => {
-        register(email, password)
+    const handleLoginSubmit = (email, password) => {
+        autorization(email, password)
             .then((data) => {
-                setFlag(true);
-                setOpenModal(true);
+                localStorage.setItem('jwt', data.token);
+                setEmail(email);
+                localStorage.setItem('email', email);
                 setTimeout(() => {
-                    history('/sign-in');
-                  }, 2000);
+                    history('/');
+                }, 2000);
             })
             .catch((err) => {
                 setOpenModal(true);
@@ -38,18 +42,17 @@ function Register() {
                 console.error(err);
             });
     }
-    const [openModal, setOpenModal] = useState(false);
-
+   
     useEffect(() => {
-    },[openModal])
+    }, [openModal])
 
     return (
         <>
             <Header />
-            {openModal && <InfoTooltip isOpen={openModal} setOpenModal={setOpenModal} flag = {flag}/>}
+            {openModal && <InfoTooltip isOpen={openModal} setOpenModal={setOpenModal} flag={flag}/>}
             <div className="registr">
                 <form className="registr__container" onSubmit={handleSubmit}>
-                    <h2 className="registr__name">Регистрация</h2>
+                    <h2 className="registr__name">Вход</h2>
                     <div className="registr__field">
                         <input className="registr__item" placeholder="Email" name="email" type="email" required=""
                             onChange={handleChangeEmail} />
@@ -58,11 +61,11 @@ function Register() {
                             onChange={handleChangePassword} />
                         <span className="registr__error" />
                     </div>
-                    <button className="registr__button-submit" type="submit">Зарегистрироваться</button>
-                    <div className="registr__text">Уже зарегистрированы? <Link to="/sign-in" className="registr__enter">Войти</Link></div>
+                    <button className="registr__button-submit" type="submit">Войти</button>
                 </form>
+                {fromPage}
             </div>
         </>
     )
 }
-export default Register;
+export default Login;

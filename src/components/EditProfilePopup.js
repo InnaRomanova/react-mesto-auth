@@ -2,7 +2,7 @@ import React from "react";
 import PopupWithForm from "./PopupWithForm.js";
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
-function EditProfilePopup({ isOpen, onClose, onUpdateUser, onCloseOverlay }) {
+function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
   const currentUser = React.useContext(CurrentUserContext);  // Подписка на контекст
@@ -12,7 +12,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, onCloseOverlay }) {
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
 
   // Обработчик изменения инпута обновляет стейт
   function handleChangeName(e) {
@@ -34,8 +34,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, onCloseOverlay }) {
 
   return (
     <PopupWithForm isOpen={isOpen} name="profile" title="Редактировать профиль"
-      onSubmit={handleSubmit} onClose={onClose}
-      onCloseOverlay={onCloseOverlay}>
+      onSubmit={handleSubmit} onClose={onClose}>
         <div
         className="form"
         id="form_profile"

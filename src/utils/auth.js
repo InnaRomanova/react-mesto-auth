@@ -50,7 +50,6 @@ export const autorization = (email, password) => {
 }
 
 export const restContent = (token) => {
-    console.log(restContent)
     return fetch(`${BASE_URL}/users/me`, {
         method: 'GET',
         headers: {

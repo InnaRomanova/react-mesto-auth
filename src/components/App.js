@@ -8,22 +8,26 @@ import * as auth from '../utils/auth.js';
 =======
 import { useEffect, useState } from 'react';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {BASE_URL, restContent} from "../utils/auth";
 // import * as auth from "../utils/auth.js";
 >>>>>>> dev
 =======
 import { restContent} from "../utils/auth";
 >>>>>>> dev
+=======
+import { restContent } from "../utils/auth";
+>>>>>>> dev
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
-import PopupWithForm from './PopupWithForm.js'
 import ImagePopup from './ImagePopup.js';
 import newApi from '../utils/Api';
 import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
 import AddPlacePopup from './AddPlacePopup.js';
 import RemoveCardPopup from './RemoveCardPopup.js';
+<<<<<<< HEAD
 <<<<<<< HEAD
 import Login from './Login.js';
 import Register from './Register.js';
@@ -35,6 +39,8 @@ import { BrowserRouter as Router, Switch, Route, Link, Routes } from "react-rout
 import SignIn from '../pages/sign-in.js';
 import SignUp from '../pages/sign-up.js';
 >>>>>>> dev
+=======
+>>>>>>> dev
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarClick] = useState(false);
@@ -45,8 +51,9 @@ function App() {
   const [selectCard, setSelectCard] = useState({});
   const [currentUser, setСurrentUser] = useState({});
   const [cards, setCards] = useState([]);
-  const [deleteCard, setDeleteCard] = useState(false);
+  const [deletedCard, setDeletedCard] = useState(false);
   const [userEmail, setUserEmail] = useState('');
+<<<<<<< HEAD
 <<<<<<< HEAD
   const [flag, setFlag] = useState(false);
   const [isInfoUser, setIsInfoUser] = useState(false);
@@ -54,6 +61,9 @@ function App() {
   const history = useNavigate();
 =======
   const [userId, setUserId] = useState('');
+=======
+  const [isLogged, setIsLogged] = useState(false);
+>>>>>>> dev
 
 <<<<<<< HEAD
   // const BASE_URL = 'https://auth.nomoreparties.co';
@@ -204,12 +214,16 @@ function App() {
     setIsImagePopupOpened(false);
     setisRemoveCardPopupOpen(false);
     setSelectCard({});
+<<<<<<< HEAD
     setDeleteCard(false);
     setIsInfoUser(false);
+=======
+    setDeletedCard(false);
+>>>>>>> dev
   }
 
   useEffect(() => {
-    Promise.all([newApi.getCards(), newApi.getUserInfo()])
+    {isLogged && Promise.all([newApi.getCards(), newApi.getUserInfo()])
       .then(([cards, userData]) => {
         setCards(cards);
         setСurrentUser(userData)
@@ -217,53 +231,32 @@ function App() {
       .catch((err) => {
         console.error(err);
       })
+<<<<<<< HEAD
   }, [loginIn]);
+=======
+  }}, [isLogged])
+>>>>>>> dev
 
   useEffect(() => {
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
       const dataEmail = localStorage.getItem("email");
-      setUserEmail(dataEmail);
-    } else {
-    }
-  }, [localStorage])
-
-  const closeByEsc = (e) => {
-    if (e.key === 'Escape') {
-      closeAllPopups()
-    }
-  }
-
-  const closeByOverlay = (e) => {
-    if (e.target.classList.contains('popup_opened')) {
-      closeAllPopups()
-    }
-  }
-
-  useEffect(() => {
-    if (isAddPlacePopupOpen || isEditAvatarPopupOpen || isEditProfilePopupOpen || isImagePopupOpened) {
-      document.addEventListener('keydown', closeByEsc);
-    }
-    return () => (document.removeEventListener('keydown', closeByEsc));
-  }, [isAddPlacePopupOpen, isEditAvatarPopupOpen, isEditProfilePopupOpen, isImagePopupOpened]);
-
-  function checkToken() {
-    if (localStorage.getItem("jwt")) {
-      const jwt = localStorage.getItem("jwt");
       restContent(jwt)
-        .then((data) => {
+        .then(() => {
+          setUserEmail(dataEmail);
+          setIsLogged(true);
         })
         .catch((err) => {
           console.error(err);
         })
-    } else {
     }
-  }
+  }, [])
 
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page__wrapper">
+<<<<<<< HEAD
 <<<<<<< HEAD
           <Header email={userEmail} onSignOut={handleSignOut} />
           <Routes>
@@ -294,6 +287,13 @@ function App() {
 =======
           <Header userEmail={userEmail} setUserEmail={setUserEmail}/>
           <Main onEditAvatar={handleEditAvatarClick}
+=======
+          <Header
+            userEmail={userEmail}
+            setUserEmail={setUserEmail} />
+          <Main
+            onEditAvatar={handleEditAvatarClick}
+>>>>>>> dev
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
             onCardClick={handleCardClick}
@@ -302,7 +302,12 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
             onDeletePopup={setisRemoveCardPopupOpen}
+<<<<<<< HEAD
             setDeleteCard={setDeleteCard} />
+>>>>>>> dev
+=======
+            setDeletedCard={setDeletedCard} 
+            />
 >>>>>>> dev
           <Footer />
         </div>
@@ -310,26 +315,27 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
-          onCloseOverlay={closeByOverlay} />
+           />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
-          onCloseOverlay={closeByOverlay} />
+           />
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
-          onCloseOverlay={closeByOverlay} />
+           />
         <RemoveCardPopup
           isOpen={isRemoveCardPopupOpen}
           onClose={closeAllPopups}
           onRemoveCardPopup={handleCardDelete}
-          deleteCard={deleteCard}
-          onCloseOverlay={closeByOverlay} />
+          deletedCard={deletedCard}
+           />
         <ImagePopup
           card={selectCard}
           onClose={closeAllPopups}
+<<<<<<< HEAD
           onCloseOverlay={closeByOverlay} />
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -338,6 +344,9 @@ function App() {
           {/* <InfoTooltip isOpen={isInfoOpen} onClose={closeAllPopups} flag={flag} /> */}
 >>>>>>> dev
 =======
+>>>>>>> dev
+=======
+           />
 >>>>>>> dev
       </CurrentUserContext.Provider>
     </div>

@@ -6,11 +6,17 @@ import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import './pages/index.css';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {BrowserRouter} from 'react-router-dom';
 =======
 import { BrowserRouter as Router,  Route,  Routes } from "react-router-dom";
 import SignIn from '../src/pages/sign-in';
 import SignUp from '../src/pages/sign-up';
+=======
+import { HashRouter as Router,  Route,  Routes } from "react-router-dom";
+import SignIn from './components/sign-in';
+import SignUp from './components/sign-up';
+>>>>>>> dev
 import ProtectedRoute from './components/ProtectedRoute';
 >>>>>>> dev
 
@@ -20,7 +26,7 @@ root.render(
     <Router>
             <div>
               <Routes>
-                <Route path="/" element={<App />} />
+                <Route path="/" element={<ProtectedRoute><App /></ProtectedRoute>} />
                 <Route path="/sign-in" element={<SignIn />} />
                 <Route path="/sign-up" element={<SignUp />} />
                 </Routes>
