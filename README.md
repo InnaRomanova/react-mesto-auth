@@ -35,7 +35,7 @@ EditAvatarPopup (использование рефа), AddPlacePopup.
 
 Запустить проект в режиме разработки
 <br>
-Для просмотра [откройте](http://localhost:3000/sign-up) в браузере.
+Для просмотра проекта в браузере нажмите [сюда](https://innaromanova.github.io/react-mesto-auth) .
 
 #### `npm run build`
 
