@@ -2,8 +2,10 @@
     max-width: 880px;
     min-height: 74px;
     padding: 45px 0 0;
-    margin: 0 200px;
+    margin: 0 auto;
     border-bottom: 1px #545454 solid;
+    display: flex;
+    justify-content: space-between;
 }
 
 .header:hover {

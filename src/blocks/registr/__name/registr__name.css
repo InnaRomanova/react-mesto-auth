@@ -1,0 +1,21 @@
+.registr__name {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    height: 29px;
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+@media screen and (max-width: 430px) {
+    .registr__name {
+        height: 24px;
+        font-size: 20px;
+        line-height: 24px;
+
+    }
+}

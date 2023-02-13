@@ -9,8 +9,8 @@ class Api {
     const pattern = {
       method: method,
       headers: {
-        authorization: this._token,
         'Content-Type': 'application/json',
+        'Authorization': this._token,
       }
     }
 

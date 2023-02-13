@@ -1,0 +1,15 @@
+.header__burger {
+ display: none;
+}
+
+@media screen and (max-width: 500px) {
+.header__burger {
+    max-width: 100%;
+    height: 102px;
+    background-color: black;
+    opacity: 0.7;
+    border: 0;
+    border-bottom: 1px solid #545454;
+    display: block;
+}
+}

@@ -1,14 +1,29 @@
 import { useEffect } from 'react'
 
-function PopupWithForm({ name, title, children, isOpen, onClose, buttonText, onSubmit,
-    onCloseOverlay }) {
+function PopupWithForm({ name, title, children, isOpen, onClose, buttonText, onSubmit }) {
+
     useEffect(() => {
-        if (isOpen) {
-          document.addEventListener('mousedown', onCloseOverlay);
-        } else {
-          document.removeEventListener('mousedown', onCloseOverlay);
+        const closeByOverlay = (e) => {
+            if (e.target.classList.contains('popup_opened')) {
+                onClose()
+            }
         }
-      }, [isOpen])
+        const closeByEsc = (e) => {
+            if (e.key === 'Escape') {
+                onClose()
+            }
+        }
+
+        if (isOpen) {
+          document.addEventListener('keydown', closeByEsc);
+        } else {document.removeEventListener('keydown', closeByEsc)};
+
+        if (isOpen) {
+            document.addEventListener('mousedown', closeByOverlay);
+        } else {
+            document.removeEventListener('mousedown', closeByOverlay);
+        }
+    }, [isOpen])
 
     return (
         <div className={`popup ${isOpen && 'popup_opened'}`} id={`popup-${name}`}>
@@ -25,8 +40,7 @@ function PopupWithForm({ name, title, children, isOpen, onClose, buttonText, onS
                     name={name}
                     onSubmit={onSubmit}
                     method="post"
-                    action="#"
-                    noValidate="">
+                    action="#">
                     <h2 className="form__title">{title}</h2>
                     {children}
                     <button

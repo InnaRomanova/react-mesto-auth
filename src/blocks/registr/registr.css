@@ -1,0 +1,15 @@
+.registr {
+    margin: 60px auto 0;
+    padding: 0;
+    /* display: flex;
+    justify-content: center; */
+    max-width: 358px;
+}
+
+@media screen and (max-width: 430px) {
+    .registr {
+        margin-top: 40px;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+    }
